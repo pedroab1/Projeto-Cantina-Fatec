@@ -1,0 +1,25 @@
+1. Classe Produto
+Será responsável por guardar os atributos de cada item.
+Atributos: nome, preco_compra, preco_venda, data_compra, data_vencimento, quantidade.
+Método Útil: __repr__ para facilitar a visualização nos relatórios.
+
+2. Classe Nodo
+Serão os nós para conectar os dados.
+Atributos: dado (o objeto Produto), proximo.
+
+3. Classe ListaEncadeada ou FilaEstoque
+Aqui será a Estrutura de Dados.
+Métodos Internos:
+inserir(produto): Adiciona um novo lote ao estoque.
+remover_por_fifo(): Localiza o produto com a data de compra mais antiga para dar baixa primeiro.
+editar_quantidade(nome, nova_qtd): Busca o produto pelo nome e altera o valor.
+vender(nome, quantidade): Percorre a estrutura, retira do estoque e valida se há itens suficientes.
+
+4. Classe Pagamento
+Atributos: pagador, categoria (aluno/servidor/professor), curso (IA/ESG), valor, data_hora.
+
+5. Classe SistemaCantina (Gerenciador Geral)
+A classe que une tudo e interage com as bibliotecas externas.
+Integração Faker: Método popular_dados() para criar produtos e vendas fictícias.
+Integração Pickle: Métodos salvar_estado() e carregar_estado().
+Relatórios: Métodos para iterar sobre as estruturas e imprimir o resumo de vendas.
