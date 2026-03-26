@@ -1,0 +1,63 @@
+Esboço de Ideias Atualizado (Versão 2) (Projeto Cantina)
+1. Classes de Dados (Modelos base)
+Para melhorar a lógica, os dados básicos do produto foram separados dos dados físicos de estoque.
+
+Classe ItemCantina: Guarda os dados genéricos do produto em si.
+
+Atributos: desc (descrição/nome), custo (preço de compra), venda (preço de venda).
+
+
+Classe PgtoPix: Registra as informações do pagamento que é feito na base da confiança.
+
+Atributos: cliente, perfil (aluno/servidor/professor), formacao (IA/ESG), valor, data_hora.
+
+2. Classes de Nós (Para as Listas Encadeadas)
+No lugar de um Nodo genérico, criamos um nó específico para cada tipo de lista, todos contendo o ponteiro prox.
+
+Classe LoteItem: Funciona como o nó da lista de estoque. Ele armazena os produtos perecíveis.
+
+Atributos: cod_lote, item (objeto ItemCantina), dt_compra, dt_vencimento, qtd, prox.
+
+Classe NoPgto: Nó para a lista de histórico de pagamentos.
+
+Atributos: id_pgto, info_pgto (objeto PgtoPix), prox.
+
+Classe RegistroConsumo: Nó para a lista de histórico de quem consumiu o quê.
+
+Atributos: id_reg, cliente, item, qtd, total, data_hora, prox.
+
+3. Estruturas de Dados (As Listas Encadeadas)
+As classes que gerenciam os nós usando o atributo cabeca como ponto de partida da estrutura.
+
+Classe ControleEstoque:
+
+
+inserir_lote(novo_lote): Adiciona um lote ordenando pela data (dt_vencimento), garantindo que a prioridade de venda recaia sobre os produtos mais velhos.
+
+alterar_qtd(cod_lote, nova_qtd): Busca um lote específico pelo código e edita o valor.
+
+deduzir_estoque(desc_item, qtd_necessaria): Percorre a estrutura, verifica se há saldo e subtrai as quantidades dos lotes.
+
+Classes HistoricoPgto e ListaConsumo:
+
+Possuem métodos como add_pgto() e add_consumo() para inserir registros nas listas encadeadas.
+
+4. Gerenciador Geral (AppCantina)
+A classe principal do sistema que unifica estoque, pagamentos e consumos.
+
+Atributos: estoque, pgtos, consumos e id_venda.
+
+Métodos:
+
+processar_venda(cliente, perfil, formacao, desc_item, qtd): Checa e deduz o estoque, gera o PgtoPix, adiciona nas listas de pagamento e consumo, avançando o ID da venda.
+
+exibir_vendas() e exibir_consumo(): Percorrem as listas (while temp != None) e imprimem os relatórios formatados.
+
+5. Funções Auxiliares (Integrações Externas)
+Deixamos a manipulação de bibliotecas em funções soltas para não poluir as classes de estrutura de dados.
+
+
+gerar_faker(app, quantidade): Loop que gera dados aleatórios para popular o sistema usando a biblioteca Faker.
+
+
+guardar_dados(app) e ler_dados(): Funções que utilizam a biblioteca Pickle para salvar e carregar os dados de maneira não volátil.
