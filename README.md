@@ -1,4 +1,4 @@
-#Controle da Cantina - Fatec Rio Claro
+## Controle da Cantina - Fatec Rio Claro
 
 Projeto desenvolvido para as disciplinas de "Estrutura de Dados" e "Linguagem de Programação 2". 
 
